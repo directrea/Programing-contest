@@ -1,18 +1,19 @@
 import io
 import sys
-# _INPUT = """\
-# 5 100
-# p1 150
-# p2 80
-# p3 200
-# p4 350
-# p5 20
-# """
-# sys.stdin = io.StringIO(_INPUT)
+_INPUT = """\
+5 100
+p1 150
+p2 80
+p3 200
+p4 350
+p5 20
+"""
+sys.stdin = io.StringIO(_INPUT)
 
 
 class Queue():
     def __init__(self, arg_size) -> None:
+        self.arg_size = arg_size
         self.items = [None]*arg_size
         self.head = 0
         self.tail = 0
@@ -21,15 +22,18 @@ class Queue():
         result = True if self.head == self.tail else False
         return result
 
-    def push(self, item):
-        self.tail += 1
-        self.items[self.tail] = item
+    def enqueue(self, item):
 
-    def pop(self):
+        self.tail += 1
+        tail = self.tail % self.arg_size
+        self.items[tail] = item
+
+    def dequeue(self):
         if self.isEmpty():
             return None
         self.head += 1
-        result = self.items[self.head]
+        head = self.head % self.arg_size
+        result = self.items[head]
         return result
 
 
@@ -41,17 +45,17 @@ class RoundRobine(Queue):
     def RoundRobine(self, quantam):
         sum_ms = 0
         while not self.times.isEmpty():
-            p = self.processes.pop()
-            t = self.times.pop()
+            p = self.processes.dequeue()
+            t = self.times.dequeue()
             for i in range(1, quantam+1):
                 sum_ms += 1
                 t -= 1
                 if t == 0:
-                    print("p%d %d" % (p, sum_ms))
+                    print("%s %d" % (p, sum_ms))
                     break
             if t > 0:
-                self.processes.push(p)
-                self.times.push(t)
+                self.processes.enqueue(p)
+                self.times.enqueue(t)
 
 
 N, Q = map(int, input().split())
@@ -59,13 +63,13 @@ N, Q = map(int, input().split())
 pes = []
 for _ in range(N):
     p = list(map(str, input().split()))
-    pes.append([int(p[0][1:]), int(p[1])])
+    pes.append([p[0], int(p[1])])
 
-SIZE = 2000
+SIZE = N
 rb = RoundRobine(SIZE)
 
 for p in pes:
-    rb.processes.push(p[0])
-    rb.times.push(p[1])
+    rb.processes.enqueue(p[0])
+    rb.times.enqueue(p[1])
 
 rb.RoundRobine(Q)

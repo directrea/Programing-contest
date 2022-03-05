@@ -1,12 +1,6 @@
-class Fish():
-    def swim(self):
-        print("泳ぐ。")
+a = 10
 
-    
+print(id(a))
 
-
-class Azi(Fish):
-    pass
-
-
-Azi().swim()
+a = 20
+print(id(a))
