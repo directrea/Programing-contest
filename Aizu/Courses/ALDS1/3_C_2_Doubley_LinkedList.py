@@ -23,22 +23,34 @@ class Node():
 class SinglyLinkedList():
     def __init__(self) -> None:
         self.length = 0
-        self.node = None
+        self.top = None
         self.tail = None
 
     def insert(self, key):
         if self.length:
-            self.node = Node(key, self.node)
+            top = self.top
+            self.top = Node(key, None, self.top)
+            top.before = self.top
             self.length += 1
         else:
-            self.node = Node(key)
+            self.top = Node(key)
+            self.tail = self.top
             self.length += 1
 
     def deleteFirst(self):
-        if self.node != None:
-            key = self.node.key
-            self.node = self.node.next
+        if self.length:
+            key = self.top.key
+            self.top = self.top.next
 
+            self.length -= 1
+            return key
+        else:
+            return None
+
+    def deleteLast(self):
+        if self.length:
+            key = self.tail.key
+            self.tail = self.tail.before
             self.length -= 1
             return key
         else:
@@ -47,9 +59,6 @@ class SinglyLinkedList():
 
 sll = SinglyLinkedList()
 sll.insert(5)
-print(id(sll.node))
 sll.insert(10)
-print(id(sll.node))
-print(sll.deleteFirst())
-print(sll.deleteFirst())
-print(sll.node)
+print(sll.deleteLast())
+print(sll.deleteLast())
