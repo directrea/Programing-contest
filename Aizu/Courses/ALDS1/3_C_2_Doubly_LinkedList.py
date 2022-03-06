@@ -1,14 +1,14 @@
 import io
 import sys
-_INPUT = """\
-5
-insert 7
-insert 3
-deleteFirst
-deleteLast
-insert 1
-"""
-sys.stdin = io.StringIO(_INPUT)
+# _INPUT = """\
+# 5
+# insert 7
+# insert 3
+# deleteFirst
+# deleteLast
+# insert 1
+# """
+# sys.stdin = io.StringIO(_INPUT)
 
 
 class Node():
@@ -36,29 +36,17 @@ class DoublyLinkedList():
             self.length += 1
 
     def deleteFirst(self):
-        if self.length:
-            node = self.top
-            key = node.key
-            self.top = node.next
-            self.top.before = None
-            self.length -= 1
-            return key
-        else:
-            return None
+        node = self.top
+        key = self.delete(node.key)
+        return key
 
     def deleteLast(self):
-        if self.length:
-            node = self.tail
-            key = node.key
-            self.tail = node.before
-            self.tail.next = None
-            self.length -= 1
-            return key
-        else:
-            return None
+        node = self.tail
+        key = self.delete(node.key, "before")
+        return key
 
-    def delete(self, x):
-        node = self.top
+    def delete(self, x, From="top"):
+        node = self.top if From =="top" else self.tail
         while node != None:
             key = node.key
             if key == x:
@@ -75,7 +63,7 @@ class DoublyLinkedList():
                 del node
                 self.length -= 1
                 return key
-            node = node.next
+            node = node.next if From =="top" else node.before
 
     def print(self):
         keys = []
@@ -90,7 +78,7 @@ dll = DoublyLinkedList()
 
 
 def Order(order, key=None):
-    print("%s %s" % (order, key))
+    # print("%s %s" % (order, key))
     if order == "insert":
         dll.insert(key)
     elif order == "delete":
@@ -104,5 +92,5 @@ def Order(order, key=None):
 n = int(input())
 for _ in range(n):
     Order(*list(input().split()))
-    dll.print()
+    # dll.print()
 dll.print()
