@@ -23,7 +23,6 @@ class Queue():
         return result
 
     def enqueue(self, item):
-
         self.tail += 1
         tail = self.tail % self.arg_size
         self.items[tail] = item

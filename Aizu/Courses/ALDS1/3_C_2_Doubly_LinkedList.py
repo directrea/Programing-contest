@@ -1,21 +1,23 @@
 import io
 import sys
-# _INPUT = """\
-# 5
-# insert 7
-# insert 3
-# deleteFirst
-# deleteLast
-# insert 1
-# """
-# sys.stdin = io.StringIO(_INPUT)
+_INPUT = """\
+7
+insert 5
+insert 2
+insert 3
+insert 1
+delete 3
+insert 6
+delete 5
+"""
+sys.stdin = io.StringIO(_INPUT)
 
 
 class Node():
-    def __init__(self, key, before=None, next=None) -> None:
+    def __init__(self, key, prev=None, next=None) -> None:
         self.key = key
         self.next = next
-        self.before = before
+        self.prev = prev
 
 
 class DoublyLinkedList():
@@ -28,7 +30,7 @@ class DoublyLinkedList():
         if self.length:
             top = self.top
             self.top = Node(key, None, self.top)
-            top.before = self.top
+            top.prev = self.top
             self.length += 1
         else:
             self.top = Node(key)
@@ -42,28 +44,28 @@ class DoublyLinkedList():
 
     def deleteLast(self):
         node = self.tail
-        key = self.delete(node.key, "before")
+        key = self.delete(node.key, "prev")
         return key
 
     def delete(self, x, From="top"):
-        node = self.top if From =="top" else self.tail
+        node = self.top if From == "top" else self.tail
         while node != None:
             key = node.key
             if key == x:
-                before = node.before
+                prev = node.prev
                 next = node.next
-                if before:
-                    before.next = next
+                if prev:
+                    prev.next = next
                 else:
                     self.top = node.next
                 if next:
-                    next.before = before
+                    next.prev = prev
                 else:
-                    self.tail = node.before
+                    self.tail = node.prev
                 del node
                 self.length -= 1
                 return key
-            node = node.next if From =="top" else node.before
+            node = node.next if From == "top" else node.prev
 
     def print(self):
         keys = []
@@ -92,5 +94,5 @@ def Order(order, key=None):
 n = int(input())
 for _ in range(n):
     Order(*list(input().split()))
-    # dll.print()
+
 dll.print()
