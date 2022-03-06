@@ -1,6 +1,8 @@
-a = 10
 
-print(id(a))
 
-a = 20
-print(id(a))
+class test():
+    def __init__(self):
+        self.a = 10
+
+
+
