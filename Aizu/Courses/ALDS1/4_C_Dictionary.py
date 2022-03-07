@@ -27,7 +27,21 @@ class Dict():
         key = 0
         for v in val:
             key += ord(v)
+            # print(key)
         return key
+
+    def insert(self, val):
+        key = self.hash(val)
+        if self.hash_table[key] == None:
+            self.hash_table[key] = LinkedList(key)
+        else:
+            self.hash_table[key].next = LinkedList(key)
+
+    def find(self, val):
+        key = self.hash(val)
+        tmp = self.hash_table[key]
+        if tmp != None:
+            print(key, tmp.key)
 
 
 n = int(input())
@@ -35,7 +49,9 @@ A = []
 for _ in range(n):
     A.append(list(map(str, input().split())))
 
-dict = Dict(1000)
+dict = Dict()
 for a in A:
-    key = dict.hash(a[1])
-    print(key)
+    if a[0] == "insert":
+        dict.insert(a[1])
+    else:
+        dict.find(a[1])
