@@ -1,8 +1,2 @@
 
-
-class test():
-    def __init__(self):
-        self.a = 10
-
-
-
+print(ord("T")*12)

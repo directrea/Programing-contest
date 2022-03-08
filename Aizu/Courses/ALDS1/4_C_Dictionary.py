@@ -19,12 +19,6 @@ find T
 # sys.stdin = io.StringIO(_INPUT)
 
 
-class LinkedList():
-    def __init__(self, key):
-        self.key = key
-        self.next = None
-
-
 class Dict():
     def __init__(self) -> None:
         size = 1000
@@ -35,42 +29,37 @@ class Dict():
         for v in val:
             key += ord(v)
             # print(key)
-        return key
+        return key % 1000
 
     def insert(self, val):
         key = self.hash(val)
         if self.hash_table[key] == None:
-            self.hash_table[key] = LinkedList(val)
+            self.hash_table[key] = [val]
         else:
-            node = self.hash_table[key]
-            while node.next != None:
-                node = node.next
-            node.next = LinkedList(val)
+            if val in self.hash_table[key]:
+                pass
+            else:
+                self.hash_table[key].append(val)
 
     def find(self, val):
         key = self.hash(val)
-        tmp = self.hash_table[key]
-        if tmp != None:
-            while tmp != None:
-                # print(tmp.key)
-                if tmp.key == val:
-                    print("yes")
-                    return
-                tmp = tmp.next
-            print("no")
-            return
+        list = self.hash_table[key]
+        if list != None:
+            if val in self.hash_table[key]:
+                print("yes")
+            else:
+                print("no")
         else:
             print("no")
 
 
 n = int(input())
-A = []
-for _ in range(n):
-    A.append(list(map(str, input().split())))
 
 dict = Dict()
-for a in A:
+for _ in range(n):
+    a = list(map(str, input().split()))
     if a[0] == "insert":
         dict.insert(a[1])
     else:
         dict.find(a[1])
+# print(dict.hash_table)
