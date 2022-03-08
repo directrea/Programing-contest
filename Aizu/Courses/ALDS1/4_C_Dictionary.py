@@ -1,15 +1,22 @@
 import io
 import sys
 _INPUT = """\
-6
+13
 insert AAA
 insert AAC
+insert AGA
+insert AGG
+insert TTT
 find AAA
+find CCC
 find CCC
 insert CCC
 find CCC
+insert T
+find TTT
+find T
 """
-sys.stdin = io.StringIO(_INPUT)
+# sys.stdin = io.StringIO(_INPUT)
 
 
 class LinkedList():
@@ -33,15 +40,27 @@ class Dict():
     def insert(self, val):
         key = self.hash(val)
         if self.hash_table[key] == None:
-            self.hash_table[key] = LinkedList(key)
+            self.hash_table[key] = LinkedList(val)
         else:
-            self.hash_table[key].next = LinkedList(key)
+            node = self.hash_table[key]
+            while node.next != None:
+                node = node.next
+            node.next = LinkedList(val)
 
     def find(self, val):
         key = self.hash(val)
         tmp = self.hash_table[key]
         if tmp != None:
-            print(key, tmp.key)
+            while tmp != None:
+                # print(tmp.key)
+                if tmp.key == val:
+                    print("yes")
+                    return
+                tmp = tmp.next
+            print("no")
+            return
+        else:
+            print("no")
 
 
 n = int(input())
