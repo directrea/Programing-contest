@@ -11,33 +11,33 @@ _INPUT = """\
 # sys.stdin = io.StringIO(_INPUT)
 
 
-def isCarry(max_carry, loads, tracks):
-    loads_idx = -1
-    for _ in range(tracks):
-        carry_cnt = 0
-        while 1:
-            loads_idx += 1
-            # 最小積載を超えないように制御
-            if loads_idx == len(loads) or carry_cnt + loads[loads_idx] > max_carry:
-                loads_idx -= 1
-                break
-            carry_cnt += loads[loads_idx]
-    return True if loads_idx == len(loads)-1 else False
-
-
 N, TRACKS = map(int, input().split())
-
 loads = []
-max = 0
 for _ in range(N):
-    num = int(input())
-    if num > max:
-        max = num
-    loads.append(num)
+    loads.append(int(input()))
 
-max_carry = max
-while 1:
-    if isCarry(max_carry, loads, TRACKS):
-        break
-    max_carry += 1
-print(max_carry)
+
+def isCarry(max_carry):
+    loads_idx = 0
+    track = 0
+    while loads_idx < N and track < TRACKS:
+        tmp_sum = 0
+        while loads_idx < N and tmp_sum + loads[loads_idx] <= max_carry:
+            tmp_sum += loads[loads_idx]
+            loads_idx += 1
+        track += 1
+    return loads_idx == N
+
+
+right = 10000*10000
+left = 0
+mid = (left+right)//2
+ans = right
+while left <= right:
+    if isCarry(mid):
+        ans = mid
+        right = mid - 1
+    else:
+        left = mid + 1
+    mid = (left+right)//2
+print("%d" % ans)
