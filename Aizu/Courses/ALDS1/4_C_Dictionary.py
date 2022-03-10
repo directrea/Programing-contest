@@ -16,7 +16,7 @@ insert T
 find TTT
 find T
 """
-# sys.stdin = io.StringIO(_INPUT)
+sys.stdin = io.StringIO(_INPUT)
 
 
 class Dict():
