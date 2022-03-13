@@ -1,11 +1,10 @@
 import io
 import sys
 import math
-import matplotlib.pyplot as plt
 _INPUT = """\
-2
+0
 """
-sys.stdin = io.StringIO(_INPUT)
+# sys.stdin = io.StringIO(_INPUT)
 
 
 def separateST(p1, p2):
@@ -27,7 +26,7 @@ def rotate(s, t):
     rad = math.radians(THETA)
     ux = math.cos(rad)*p[0] - math.sin(rad) * p[1]
     uy = math.sin(rad)*p[0] + math.cos(rad) * p[1]
-    return [ux + p[0], uy + p[1]]
+    return [ux + s[0], uy + s[1]]
 
 
 N = int(input())
@@ -35,13 +34,12 @@ N = int(input())
 # E = [50.00000000000001, 28.867513459481287]
 S = [0.0, 0.0]
 E = [100, 0.0]
-vertices = [S]
+print(*S)
 
 
 def KochCurve(n, S, E):
     if n == 0:
-        vertices.append(E)
-        print(E)
+        print(*E)
         return
     st = separateST(S, E)
     u = rotate(st[0], st[1])
@@ -51,17 +49,14 @@ def KochCurve(n, S, E):
     KochCurve(n-1, st[1], E)
 
 
-print(S)
-KochCurve(3, S, E)
+KochCurve(N, S, E)
 
+# x = []
+# y = []
 # for vertex in vertices:
-#     print(*vertex)
-x = []
-y = []
-for vertex in vertices:
-    x.append(vertex[0])
-    y.append(vertex[1])
-plt.scatter(x, y)
-plt.xlim(-50, 120)
-plt.ylim(-50, 120)
-plt.savefig("mygraph.png")
+#     x.append(vertex[0])
+#     y.append(vertex[1])
+# plt.scatter(x, y)
+# plt.xlim(-50, 120)
+# plt.ylim(-50, 120)
+# plt.savefig("mygraph.png")
