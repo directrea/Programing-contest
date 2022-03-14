@@ -1,7 +1,12 @@
-def factorial(n):
-    if n == 1:
-        return 1
-    return n*factorial(n-1)
+
+cnt = 0
 
 
-print(factorial(5))
+def inc():
+    global cnt
+    cnt += 1
+
+
+inc()
+inc()
+print(cnt)
