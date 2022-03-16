@@ -1,5 +1,3 @@
-
-
 def merge(A, L, M, R):
     global cnt, INF
     L_ary = A[L:M] + [INF]
