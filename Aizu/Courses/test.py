@@ -1,12 +1,3 @@
-
-cnt = 0
-
-
-def inc():
-    global cnt
-    cnt += 1
-
-
-inc()
-inc()
-print(cnt)
+A = {1: 100, 100: 200}
+A[20] = 1000
+print(A[20])
