@@ -1,18 +1,14 @@
 import io
 import sys
 _INPUT = """\
-9
+5
+0 1 4
 1 2 3
 2 -1 -1
 3 -1 -1
-4 5 8
-5 6 7
-0 1 4
-6 -1 -1
-7 -1 -1
-8 -1 -1
+4 -1 -1
 """
-# sys.stdin = io.StringIO(_INPUT)
+sys.stdin = io.StringIO(_INPUT)
 
 
 class Node():
@@ -39,13 +35,13 @@ def printNodes(nodes):
 pro_ary = []
 
 
-def proOrder(root, nodes):
+def preOrder(root, nodes):
     pro_ary.append(root.id)
     child = root.child
     if child[0] != -1:
-        proOrder(nodes[child[0]], nodes)
+        preOrder(nodes[child[0]], nodes)
     if child[1] != -1:
-        proOrder(nodes[child[1]], nodes)
+        preOrder(nodes[child[1]], nodes)
 
 
 in_ary = []
@@ -93,7 +89,7 @@ makeTree(nodes)
 # printNodes(nodes)
 root = searchRoot(nodes)
 print("Preorder")
-proOrder(root, nodes)
+preOrder(root, nodes)
 print("", *pro_ary)
 print("Inorder")
 inOrder(root, nodes)
