@@ -1,16 +1,7 @@
-class Node():
-    def __init__(self, key, parent=None) -> None:
-        self.key = key
-        self.parent = parent
-        self.child = None
+var = 100
 
-
-root = Node(1)
-
-root.child = Node(2, root)
-
-node = root.child
-del node
-
-del root.child
-pass
+match var:
+    case 100:
+        print(100)
+    case 200:
+        print(200)

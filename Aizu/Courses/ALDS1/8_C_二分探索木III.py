@@ -1,15 +1,49 @@
 import io
 import sys
 _INPUT = """\
-1
+43
 insert 30
-insert 88
-insert 12
-insert 1
-insert 20
-find 12
 insert 17
+insert 88
+insert 53
+insert 5
+insert 20
+insert 18
+insert 28
+insert 27
+insert 60
+print
+find -1
+find 2
+find 3
+find 4
+find 5
+find 6
+find 10
+find 17
+find 28
+find 29
+find 30
+find 31
+find 50
+find 51
+find 52
+find 53
+find 54
+find 60
+find 88
+find 89
+insert 2000000000
+insert 55
+insert 63
+insert -1
+insert 8
+print
+delete 53
+delete 2000000000
 delete 20
+delete 5
+delete 8
 print
 """
 sys.stdin = io.StringIO(_INPUT)
@@ -70,7 +104,7 @@ class BinaryTree():
                 else:
                     return None
 
-    def cnt_child(self,node):
+    def cnt_child(self, node):
         cnt_child = 0
         left = node.left
         right = node.right
@@ -80,38 +114,36 @@ class BinaryTree():
             cnt_child += 1
         return cnt_child
 
-    def isLeft_child(self,parent, child):
-        if parent.left == child:
-            return True
+    def delete(self, key, node=None):
+        if node:
+            pass
         else:
-            return False
-
-    def delete(self, key):
-        node = self.find(key)
+            node = self.find(key)
         if node:
             parent = node.parent
             cnt_child = self.cnt_child(node)
-            if cnt_child == 2:
-                pass
-            elif cnt_child == 1:
-                child = None
-                if node.left:
-                    child = node.left
-                else:
+            match cnt_child:
+                case 2:
                     child = node.right
-                if self.isLeft_child(parent, node):
-                    parent.left = child
-                else:
-                    parent.right = child
-
-            else:
-                
-                if parent:
-                    if parent.left == node:
+                    node.key = child.key
+                    self.delete(key, child)
+                case 1:
+                    child = None
+                    if node.left:
+                        child = node.left
+                    else:
+                        child = node.right
+                    if child.key < parent.key:
+                        parent.left = child
+                        child.parent = parent
+                    else:
+                        parent.right = child
+                        child.parent = parent
+                case 0:
+                    if parent and node.key < parent.key:
                         parent.left = None
                     else:
                         parent.right = None
-                node = None
 
     def inOrder(self, root=None):
         if root == None:

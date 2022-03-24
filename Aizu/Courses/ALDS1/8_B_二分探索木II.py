@@ -2,18 +2,14 @@ import io
 import sys
 _INPUT = """\
 10
-insert 30
-insert 88
-insert 12
 insert 1
-insert 20
-find 12
-insert 17
-insert 25
-find 16
+insert 2
+insert 3
+insert 4
+insert 5
 print
 """
-# sys.stdin = io.StringIO(_INPUT)
+sys.stdin = io.StringIO(_INPUT)
 
 
 class Node():
