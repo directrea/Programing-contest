@@ -1,7 +1,7 @@
-var = 100
+def rec(n):
+    if n == 10:
+        return "yes"
+    return rec(n + 1)
 
-match var:
-    case 100:
-        print(100)
-    case 200:
-        print(200)
+
+print(rec(0))

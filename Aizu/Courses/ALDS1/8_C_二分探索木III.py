@@ -1,55 +1,32 @@
 import io
 import sys
+
 _INPUT = """\
-43
-insert 30
-insert 17
-insert 88
-insert 53
-insert 5
-insert 20
-insert 18
-insert 28
-insert 27
-insert 60
-print
-find -1
+18
+insert 8
+insert 2
+insert 3
+insert 7
+insert 22
+insert 1
+find 1
 find 2
 find 3
 find 4
 find 5
 find 6
-find 10
-find 17
-find 28
-find 29
-find 30
-find 31
-find 50
-find 51
-find 52
-find 53
-find 54
-find 60
-find 88
-find 89
-insert 2000000000
-insert 55
-insert 63
-insert -1
-insert 8
+find 7
+find 8
 print
-delete 53
-delete 2000000000
-delete 20
-delete 5
-delete 8
+delete 3
+delete 7
 print
 """
-sys.stdin = io.StringIO(_INPUT)
+# sys.stdin = io.StringIO(_INPUT)
 
 
 class Node():
+
     def __init__(self, key, parent=None) -> None:
         self.key = key
         self.parent = parent
@@ -58,6 +35,7 @@ class Node():
 
 
 class BinaryTree():
+
     def __init__(self):
         self.T = None
         self.len = 0
@@ -122,28 +100,33 @@ class BinaryTree():
         if node:
             parent = node.parent
             cnt_child = self.cnt_child(node)
-            match cnt_child:
-                case 2:
+            if cnt_child == 2:
+                next_node = self.next_inOrder(node.right)
+                node.key = next_node.key
+                self.delete(0, next_node)
+            elif cnt_child == 1:
+                child = None
+                if node.left:
+                    child = node.left
+                else:
                     child = node.right
-                    node.key = child.key
-                    self.delete(key, child)
-                case 1:
-                    child = None
-                    if node.left:
-                        child = node.left
-                    else:
-                        child = node.right
-                    if child.key < parent.key:
-                        parent.left = child
-                        child.parent = parent
-                    else:
-                        parent.right = child
-                        child.parent = parent
-                case 0:
-                    if parent and node.key < parent.key:
-                        parent.left = None
-                    else:
-                        parent.right = None
+                if child.key < parent.key:
+                    parent.left = child
+                    child.parent = parent
+                else:
+                    parent.right = child
+                    child.parent = parent
+            elif cnt_child == 0:
+                if parent and node.key < parent.key:
+                    parent.left = None
+                else:
+                    parent.right = None
+
+    def next_inOrder(self, root):
+        if root.left != None:
+            return self.next_inOrder(root.left)
+        else:
+            return root
 
     def inOrder(self, root=None):
         if root == None:
