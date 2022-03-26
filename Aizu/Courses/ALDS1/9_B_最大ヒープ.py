@@ -5,7 +5,7 @@ _INPUT = """\
 10
 4 1 3 2 16 9 10 14 8 7
 """
-# sys.stdin = io.StringIO(_INPUT)
+sys.stdin = io.StringIO(_INPUT)
 
 N = int(input())
 A = [i for i in map(int, input().split())]
