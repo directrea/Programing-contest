@@ -15,18 +15,12 @@ def makeHeapify(A, i):
     l = i * 2
     r = i * 2 + 1
     largest = i
-    logi_i = i - 1
-    logi_l = l - 1
-    logi_r = r - 1
-    logi_largest = largest - 1
-    if l <= N and A[logi_l] > A[logi_i]:
+    if l <= N and A[l - 1] > A[i - 1]:
         largest = l
-        logi_largest = largest - 1
-    if r <= N and A[logi_r] > A[logi_largest]:
+    if r <= N and A[r - 1] > A[largest - 1]:
         largest = r
-        logi_largest = largest - 1
     if i != largest:
-        A[logi_i], A[logi_largest] = A[logi_largest], A[logi_i]
+        A[i - 1], A[largest - 1] = A[largest - 1], A[i - 1]
         makeHeapify(A, largest)
 
 

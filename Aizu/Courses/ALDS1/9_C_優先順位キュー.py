@@ -4,12 +4,14 @@ import sys
 _INPUT = """\
 insert 8
 insert 2
-extractMax
+extract
 insert 10
-extractMax
+extract
 insert 11
-extractMax
-extractMax
+insert 100
+extract
+extract
+extract
 end
 """
 # sys.stdin = io.StringIO(_INPUT)
@@ -20,50 +22,54 @@ class PriorityQueue():
     def __init__(self) -> None:
         self.A = []
 
+    def upperHeap(self, child):
+        A = self.A
+        parent_idx = child // 2
+        if child > 1 and A[child - 1] > A[parent_idx - 1]:
+            A[child - 1], A[parent_idx - 1] = A[parent_idx - 1], A[child - 1]
+            self.upperHeap(parent_idx)
+
     def insert(self, key):
         A = self.A
-        self.A.append(key)
-        key_idx = len(A) - 1
-        exchange = True
-        while exchange:
-            parent_idx = key_idx // 2
-            if A[key_idx] > A[parent_idx]:
-                A[key_idx], A[parent_idx] = A[parent_idx], A[key_idx]
-                key_idx = parent_idx
-            else:
-                exchange = False
+        A.append(key)
+        self.upperHeap(len(A))
+
+    def makeHeapify(self, i):
+        A = self.A
+        l = i * 2
+        r = i * 2 + 1
+        largest = i
+        if l <= len(A) and A[l - 1] > A[i - 1]:
+            largest = l
+        if r <= len(A) and A[r - 1] > A[largest - 1]:
+            largest = r
+        if i != largest:
+            A[i - 1], A[largest - 1] = A[largest - 1], A[i - 1]
+            self.makeHeapify(largest)
 
     def extractMax(self):
         A = self.A
-        tail_idx =  len(A)- 1
-        A[0], A[tail_idx] = A[tail_idx], A[0]
-        ans = A.pop()
+        if not A:
+            return -1
+        ans = A[0]
+        tmp = A.pop()
+        if A:
+            A[0] = tmp
+        else:
+            A.append(tmp)
         key_idx = 1
-        exchange = True
-        while exchange:
-            largest_idx = key_idx
-            left = key_idx *2
-            right = left + 1
-            if left <= len(A) and A[left - 1] > A[key_idx - 1]:
-                largest_idx = left
-            if right <= len(A) and A[right - 1] > A[largest_idx - 1]:
-                largest_idx = right
-            if largest_idx != key_idx:
-                A[key_idx - 1], A[largest_idx - 1] = A[largest_idx - 1], A[key_idx - 1]
-                key_idx=largest_idx
-            else:
-                exchange=False
+        self.makeHeapify(1)
         return ans
 
 
 input = sys.stdin.readline
 pq = PriorityQueue()
 while True:
-    ls = list(map(str, input().split()))
+    ls = input().split()
     if ls[0] == "insert":
         key = int(ls[1])
         pq.insert(key)
-    elif ls[0] == "extractMax":
+    elif ls[0] == "extract":
         print(pq.extractMax())
     elif ls[0] == "end":
         break
