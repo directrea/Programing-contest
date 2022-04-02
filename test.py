@@ -1,5 +1,2 @@
-from gettext import dpgettext
-
-dp = [[1, 2, 3], [4, 7, 8]]
-for d in dp[len(dp) - 1]:
-    print(d)
+A=[0, -1, 3, -1, 4, -1, 7, -1, 8, -1, -1, -1]
+print(max(A))
