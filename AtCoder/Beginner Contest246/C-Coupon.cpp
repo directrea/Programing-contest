@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -16,12 +15,14 @@ int main()
     }
     for (int a : A)
     {
-        cout << a;
+        cout << a<<" ";
     }
+    cout << endl;
 
-    for (int i = 0; i < sizeof(A); i++)
+    for (int i = 0; i < A.size(); i++)
     {
         int syou = A[i] / val;
         cout << syou << endl;
     }
+    return 0;
 }
