@@ -1,4 +1,7 @@
 {
     "python.formatting.provider": "yapf",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "ostream": "cpp"
+    }
 }
