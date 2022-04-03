@@ -2,12 +2,10 @@
 #include <vector>
 using namespace std;
 
-int main()
-{
-
-    vector<int> A{1, 2, 3, 4, 5};
-
-    cout << A.size() << endl;
-
-    return 0;
+int main() {
+  vector<int> test{10, 100, 200};
+  int tmp = test.back();
+  test.pop_back();
+  cout << tmp << endl;
+  return 0;
 }
