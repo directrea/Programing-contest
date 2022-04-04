@@ -1,11 +1,6 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+using ll = long long;
 
-int main() {
-  vector<int> test{10, 100, 200};
-  int tmp = test.back();
-  test.pop_back();
-  cout << tmp << endl;
-  return 0;
-}
+int main() { return 0; }
