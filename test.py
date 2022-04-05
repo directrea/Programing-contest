@@ -1,3 +1,3 @@
 import math
 
-print(math.sqrt(10**10))
+print("1"*3000)
