@@ -7,7 +7,7 @@ _INPUT = """\
 4
 2 4 17 8
 """
-# sys.stdin = io.StringIO(_INPUT)
+sys.stdin = io.StringIO(_INPUT)
 
 N = int(input())
 A = list(map(int, input().split()))
