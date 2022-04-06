@@ -1,31 +1,32 @@
-#include <math.h>
-
 #include <iostream>
-#include <set>
 #include <vector>
 using namespace std;
 using ll = long long;
 
 int main() {
   int N;
-  vector<int> A;
   cin >> N;
-  char c;
+  vector<int> A(N);
   for (int i = 0; i < N; i++) {
+    char c;
     cin >> c;
-    A.push_back(int(c) - 48);
+    A[i] = (int)c - 48;
   }
-
   // for (int i : A) printf("%d ", i);
-
-  set<int> pass;
-  for (int i = 0; i < N - 2; i++) {
-    for (int j = i + 1; j < N - 1; j++) {
-      for (int k = j + 1; k < N; k++) {
-        pass.insert(A[i] * 100 + A[j] * 10 + A[k] * 1);
+  int ans = 0;
+  for (int i = 0; i < 1000; i++) {
+    vector<int> PIN{i / 100, (i / 10) % 10, i % 10};
+    int PIN_idx = 0;
+    for (int i : A) {
+      if (PIN[PIN_idx] == i) {
+        PIN_idx++;
+      }
+      if (PIN_idx == 3) {
+        ans++;
+        break;
       }
     }
   }
-  cout << pass.size() << endl;
+  cout << ans << endl;
   return 0;
 }
