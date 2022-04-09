@@ -19,19 +19,14 @@ void makeComb(int N) {
   rec(tmp_vec, N - 1);
 }
 
-bool isContradiction(vector<int> &comb, vector<vector<vector<int>>> witnesses) {
-  for (vector<int> t : testimonys) {
-    switch (t[1]) {
-      case 0:
-        if (comb[t[0] - 1] == t[1]) {
-          return true;
-        }
-        break;
-      case 1:
-        if (comb[t[0] - 1] != t[1]) {
-          return true;
-        }
-        break;
+bool isContradiction(vector<int> &comb,
+                     vector<vector<vector<int>>> &witnesses) {
+  for (int i = 0; i < witnesses.size(); i++) {
+    if (!comb[i]) continue;
+    for (vector<int> t : witnesses[i]) {
+      if (comb[t[0] - 1] != t[1]) {
+        return true;
+      }
     }
   }
   return false;
@@ -54,21 +49,19 @@ int main() {
     }
     witnesses.push_back(testimonys);
   }
+
   makeComb(N);
   vector<vector<int>> answers;
-  // for (vector<int> comb : combs) {
-  vector<int> comb{1, 1, 1};
-  bool ans = false;
-  for (vector<vector<int>> ts : witnesses) {
-    bool tmp = isContradiction(comb, ts);
-    ans = ans || tmp;
-    if (ans) {
-      break;
+  int ans_max = 0;
+  for (vector<int> comb : combs) {
+    bool ans = isContradiction(comb, witnesses);
+    if (!ans) {
+      int tmp_cnt = 0;
+      for (int i : comb)
+        if (i) tmp_cnt++;
+      if (tmp_cnt > ans_max) ans_max = tmp_cnt;
     }
   }
-  if (!ans) {
-    answers.push_back(comb);
-  }
-  // }
+  cout << ans_max << endl;
   return 0;
 }
