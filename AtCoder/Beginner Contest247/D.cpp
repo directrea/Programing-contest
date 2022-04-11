@@ -5,10 +5,10 @@ using namespace std;
 using ll = long long;
 
 int main() {
-  int N;
-  cin >> N;
+  int Q;
+  cin >> Q;
   deque<pair<ll, ll>> dq;  // pair<値, 個数>
-  for (int i = 0; i < N; i++) {
+  while (Q--) {
     int query, x, c;
     cin >> query;
     switch (query) {
@@ -19,7 +19,7 @@ int main() {
       case 2:
         cin >> c;
         ll ans_sum = 0;
-        while (c) {
+        while (c > 0) {
           if (c >= dq.front().second) {
             c -= dq.front().second;
             ans_sum += dq.front().first * dq.front().second;
