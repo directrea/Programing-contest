@@ -14,21 +14,22 @@ int main() {
     a--, b--;
     G[a].insert(b), G[b].insert(a);
   }
-  vector<int> ord{0, 2, 3, 4, 5, 6, 1};
-  // rep(i, 0, N) ord[i] = i;
-
-  for (int i : ord) cout << i;
-  cout << endl;
-  int bf = ord[0];
-  bool match = true;
-  for (int i = 1; i < N; i++) {
-    if (G[bf].count(ord[i]) == 0) {
-      match = false;
-      break;
+  vector<int> ord(N);
+  rep(i, 0, N) ord[i] = i;
+  vector<int>::iterator itr = ord.begin();
+  itr++;
+  do {
+    int bf = ord[0];
+    bool match = true;
+    for (int i = 1; i < N; i++) {
+      if (G[bf].count(ord[i]) == 0) {
+        match = false;
+        break;
+      }
+      bf = ord[i];
     }
-    bf = ord[i];
-  }
-  if (match) ans_cnt++;
+    if (match) ans_cnt++;
+  } while (next_permutation(itr, ord.end()));
   cout << ans_cnt << endl;
   return 0;
 }
