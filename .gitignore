@@ -14,3 +14,5 @@
 # Built Visual Studio Code Extensions
 *.vsix
 test
+プロコン.code-workspace
+.DS_Store
