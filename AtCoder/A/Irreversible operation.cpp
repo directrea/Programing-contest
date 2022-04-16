@@ -4,15 +4,7 @@
 using ll = long long;
 using namespace std;
 
-int ans_cnt = 0;
-bool irreversible(vector<char> &A, int i) {
-  if (A[i - 1] == 'B' && A[i] == 'W') {
-    A[i - 1] = 'W', A[i] = 'B';
-    ans_cnt++;
-    return true;
-  }
-  return false;
-}
+ll ans_cnt = 0;
 
 int main() {
   string st;
@@ -21,17 +13,20 @@ int main() {
   for (char ch : st) {
     A.push_back(ch);
   }
+  int W_idx;
+  rep(i, 0, A.size()) {
+    if (A[i] == 'B') {
+      W_idx = i;
+      break;
+    }
+  }
 
   for (int i = 1; i < A.size(); i++) {
-    if (irreversible(A, i)) {
-      int tmp_i = i - 1;
-      while (tmp_i > 0) {
-        if (irreversible(A, tmp_i)) {
-          tmp_i--;
-        } else {
-          break;
-        }
-      }
+    if (A[i - 1] == 'B' && A[i] == 'W') {
+      ans_cnt += i - W_idx;
+      A[W_idx] = 'W', A[i] = 'B';
+      W_idx++;
+      
     }
   }
   cout << ans_cnt << endl;
