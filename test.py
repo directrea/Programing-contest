@@ -1,5 +1,5 @@
 st = 'a'
 
 for i in range(27):
-    print(i)
+    print(chr(ord('a')+i))
 

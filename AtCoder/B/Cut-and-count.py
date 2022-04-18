@@ -9,7 +9,12 @@ sys.stdin = io.StringIO(_INPUT)
 N = int(input())
 st = input()
 
-X = [0 for _ in range(27)]
-Y = [0 for _ in range(27)]
+X = {}
+Y = {}
+
+for i in range(27):
+    X[chr(ord('a')+i)] = 0
+    Y[chr(ord('a')+i)] = 0
 
 
+pass
