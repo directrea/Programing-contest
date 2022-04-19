@@ -1,21 +1,10 @@
-def makeCombination(N):
-    S = []
-    for _ in range(N):
-        S.append(0)
-    rec(N-1, S)
 
+BIN = 0b01011
+tmp_bin = BIN
 
-combs = []
-
-
-def rec(i, S):
-    if -1 == i:
-        print(S)
-        return
-    rec(i-1, S)
-    S[i] = 1
-    rec(i-1, S)
-    S[i] = 0
-
-
-makeCombination(3)
+tmp_bin >= 1
+print(tmp_bin)
+# for i in range(2):
+#     bin_str = bin(tmp_bin)
+#     if bin_str[2] == "1":
+#         tmp_bin >=
