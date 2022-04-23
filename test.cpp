@@ -1,15 +1,24 @@
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = a; i < b; i++)
-#define all(x) (x).begin(), (x).end()
-using ll = long long;
+
+#include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-  string st = "abcd";
-  string A, B;
-  int mid = st.size() / 2;
-  rep(i, 0, mid) A.push_back(st[i]);
-  rep(i, mid, st.size()) B.push_back(st[i]);
+  int n = 3;
 
-  return 0;
+  // {0, 1, ..., n-1} の部分集合の全探索
+  for (int bit = 0; bit < (1 << n); ++bit) {
+    vector<int> S;
+    for (int i = 0; i < n; ++i) {
+      if (bit & (1 << i)) {  // 列挙に i が含まれるか
+        S.push_back(i);
+      }
+    }
+
+    cout << bit << ": {";
+    for (int i = 0; i < (int)S.size(); ++i) {
+      cout << S[i] << " ";
+    }
+    cout << "}" << endl;
+  }
 }
