@@ -13,9 +13,6 @@ int main() {
     cin >> st;
     for (char c : st) A[c - 'a']++;
   }
-  int anscnt = 0;
-  for (int i : A)
-    if (i >= K) anscnt++;
-  cout << anscnt << endl;
+  
   return 0;
 }

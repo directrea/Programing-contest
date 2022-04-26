@@ -1,22 +1,13 @@
-def rate_allocate(rates, rate):
-    SEP = 400
-    MAX_ALLOCATE = 3200
-    rate_sep = SEP
-    idx = 0
-    if MAX_ALLOCATE <= rate:
-        rates[-1] += 1
-        return
-    while rate_sep <= MAX_ALLOCATE:
-        if rate < rate_sep:
-            rates[idx] += 1
-            break
-        idx += 1
-        rate_sep += SEP
+import io
+import sys
+_INPUT = """\
 
-
-COLORS = 9
-rates = [0 for _ in range(COLORS)]
-
-for i in range(1, 4800):
-    rate_allocate(rates, i)
-print(rates)
+"""
+sys.stdin = io.StringIO(_INPUT)
+N = 3
+for bit in range(1 << N):
+    tmp = []
+    for i in range(N):
+        if bit & (1 << i):
+            tmp.append(i)
+    print(tmp)
