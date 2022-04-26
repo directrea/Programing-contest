@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import io
 import sys
 _INPUT = """\
@@ -11,3 +12,6 @@ for bit in range(1 << N):
         if bit & (1 << i):
             tmp.append(i)
     print(tmp)
+=======
+print(ord('a'))
+>>>>>>> 22c495ff0393198b13b7c03f135763c377f06392
