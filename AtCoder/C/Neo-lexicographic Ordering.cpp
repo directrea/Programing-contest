@@ -4,7 +4,7 @@
 using ll = long long;
 using namespace std;
 
-vector<int> sortstr(vector<char> dicvec, string str) {
+vector<int> sortstr(vector<char> const &dicvec, string str) {
   vector<int> conv;
   for (char c : str) {
     for (int i = 0; i < dicvec.size(); i++) {
@@ -19,7 +19,7 @@ int main() {
   cin >> dict;
 
   vector<char> dicvec;
-  for (char c : dict) {
+  for (char &c : dict) {
     dicvec.push_back(c);
   }
 
@@ -32,14 +32,10 @@ int main() {
     conved.push_back(sortstr(dicvec, str));
   }
 
-  priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
-  for (vector<int> conv : conved) pq.push(conv);
-
-  while (pq.size()) {
-    for (int idx : pq.top()) cout << dicvec[idx];
+  sort(all(conved));
+  for (vector<int> &conv : conved) {
+    for (int idx : conv) cout << dicvec[idx];
     cout << endl;
-    pq.pop();
   }
-
   return 0;
 }
