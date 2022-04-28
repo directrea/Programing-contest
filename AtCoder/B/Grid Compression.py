@@ -3,14 +3,17 @@ import sys
 from collections import deque
 
 _INPUT = """\
-4 5
-.....
-.....
-..#..
-.....
+7 6
+......
+....#.
+.#....
+..#...
+..#...
+......
+.#..#.
 
 """
-sys.stdin = io.StringIO(_INPUT)
+# sys.stdin = io.StringIO(_INPUT)
 
 
 def isRowblank(vec):
@@ -31,11 +34,11 @@ for i in range(H):
             vvec[i][j] = True
 idx = 0
 rvvec = []
-for i in range(len(rvvec)):
-    if (isRowblank(rvvec[i])):
+for i in range(len(vvec)):
+    if (isRowblank(vvec[i])):
         pass
     else:
-        rvvec.append(rvvec[i])
+        rvvec.append(vvec[i])
 
 blankcols = []
 for j in range(len(rvvec[0])):
