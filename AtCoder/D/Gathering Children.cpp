@@ -4,56 +4,53 @@
 using ll = long long;
 using namespace std;
 
-bool ismatchary(vector<int> &A, vector<int> &B) {
-  bool ans = true;
-  for (int i = 0; i < A.size(); i++) {
-    if (A[i] != B[i]) ans = false;
-  }
-  return ans;
-}
-
-void movechilds(vector<char> const &A, vector<int> &childs) {
-  vector<int> tmpchild = childs;
-  for (int j = 0; j < childs.size(); j++) {
-    if (A[j] == 'R') {
-      tmpchild[j + 1] += childs[j];
-      tmpchild[j] -= childs[j];
-    } else {
-      tmpchild[j - 1] += childs[j];
-      tmpchild[j] -= childs[j];
-    }
-  }
-  childs = tmpchild;
-}
-
 int main() {
   string str;
   cin >> str;
-  vector<char> A;
-  for (char c : str) {
-    A.push_back(c);
+  int cnt = 0;
+  vector<char> lr;
+  vector<int> cnts;
+  int idx = 0;
+  while (idx < str.size()) {
+    char mozi = str[idx];
+    lr.push_back(mozi);
+    int cnt = 0;
+    while (idx < str.size() && mozi == str[idx]) {
+      cnt++;
+      idx++;
+    }
+    cnts.push_back(cnt);
   }
 
-  vector<int> childs(str.size(), 1);
-  vector<int> bfchilds = childs;
-  int cnt = 0;
-  while (true) {
-    cnt++;
-    // for (int num : childs) cout << num;
-    // cout << endl;
-    movechilds(A, childs);
-    if (str.size() > cnt && cnt % 2 == 0) {
-      if (ismatchary(bfchilds, childs))
-        break;
+  // for (char c : lr) cout << c << " ";
+  // cout << endl;
+  // for (int i : cnts) cout << i << " ";
+  // cout << endl;
+  vector<int> anscnts = cnts;
+  for (int i = 0; i < lr.size(); i++) {
+    int wari = cnts[i] / 2;
+    if (wari) {
+      if (lr[i] == 'R')
+        anscnts[i] -= wari, anscnts[i + 1] += wari;
       else
-        bfchilds = childs;
+        anscnts[i] -= wari, anscnts[i - 1] += wari;
     }
   }
-  for (int i = 0; i < childs.size(); i++) {
+  // for (char c : lr) cout << c << " ";
+  // cout << endl;
+  // for (int i : anscnts) cout << i << " ";
+  // cout << endl;
+  vector<int> ansvec;
+  for (int i = 0; i < cnts.size(); i++) {
+    if (lr[i] == 'R') rep(j, 0, cnts[i] - 1) ansvec.push_back(0);
+    ansvec.push_back(anscnts[i]);
+    if (lr[i] == 'L') rep(j, 0, cnts[i] - 1) ansvec.push_back(0);
+  }
+  for (int i = 0; i < ansvec.size(); i++) {
     if (i)
-      cout << " " << childs[i];
+      cout << ' ' << ansvec[i];
     else
-      cout << childs[i];
+      cout << ansvec[i];
   }
   cout << endl;
   return 0;
