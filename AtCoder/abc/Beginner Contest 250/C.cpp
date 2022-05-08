@@ -19,23 +19,15 @@ int main() {
     cin >> x;
     x--;
     int idx = idxs[x];
-    if (idx == N - 1) {
-      int work = vec[idx];
-      vec[idx] = vec[idx - 1];
-      vec[idx - 1] = work;
+    int lr = 0;
 
-      work = idxs[vec[idx]];
-      idxs[vec[idx]] = idxs[vec[idx - 1]];
-      idxs[vec[idx - 1]] = work;
-    } else {
-      int work = vec[idx];
-      vec[idx] = vec[idx + 1];
-      vec[idx + 1] = work;
+    if (idx == N - 1)
+      lr--;
+    else
+      lr++;
 
-      work = idxs[vec[idx]];
-      idxs[vec[idx]] = idxs[vec[idx + 1]];
-      idxs[vec[idx + 1]] = work;
-    }
+    swap(vec[idx], vec[idx + lr]);
+    swap(idxs[vec[idx]], idxs[vec[idx + lr]]);
   }
 
   for (int i = 0; i < N; i++) {
