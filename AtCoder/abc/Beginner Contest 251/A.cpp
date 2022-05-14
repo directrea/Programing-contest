@@ -5,6 +5,15 @@ using ll = long long;
 using namespace std;
 
 int main() {
-  int ts =pow(10,6)*3;
+  string st;
+  cin >> st;
+  int n = st.size();
+  string ans = "";
+
+  for (int i = 0; i < 6; i++) {
+    ans += st[i % n];
+  }
+  cout << ans << endl;
+
   return 0;
 }
