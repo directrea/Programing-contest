@@ -12,10 +12,7 @@ int main() {
   bool flag = true;
   for (int i = 0; i < N * B; i++) {
     if (i % B == 0) {
-      if (flag)
-        flag = false;
-      else
-        flag = true;
+      flag = !flag;
     }
     if (flag)
       ft[i] = true;
@@ -26,10 +23,7 @@ int main() {
   flag = false;
   for (int i = 0; i < N * B; i++) {
     if (i % B == 0) {
-      if (flag)
-        flag = false;
-      else
-        flag = true;
+      flag = !flag;
     }
     if (flag)
       sec[i] = true;
@@ -39,10 +33,7 @@ int main() {
   flag = false;
   for (int i = 0; i < N * A; i++) {
     if (i % A == 0) {
-      if (flag)
-        flag = false;
-      else
-        flag = true;
+      flag = !flag;
     }
     vector<bool> tmp;
     if (flag) {
