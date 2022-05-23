@@ -3,13 +3,14 @@
   "tasks": [
     {
       "type": "cppbuild",
-      "label": "Debug cpp",
+      "label": "build cpp",
       "command": "/usr/bin/g++",
       "args": [
+        "-fdiagnostics-color=always",
         "-g",
         "${file}",
         "-o",
-        "'${workspaceFolder}/problem.exe'"
+        "${workspaceFolder}/problem.exe"
       ],
       "options": {
         "cwd": "${fileDirname}"
@@ -17,8 +18,11 @@
       "problemMatcher": [
         "$gcc"
       ],
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "detail": "デバッガーによって生成されたタスク。"
-    },
+    }
   ]
 }

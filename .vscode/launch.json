@@ -8,6 +8,18 @@
             "program": "${workspaceFolder}/problem.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
+            "enviroment": [],
+            "linux": {
+                "MTMode": "gdb",
+                "setupCommands": [
+                    {
+                        "text": "-enable-pretty-printing"
+                    },
+                    {
+                        "text": "handle SIGPIPE nostop noprint pass"
+                    }
+                ]
+            }
         }
     ]
 }
