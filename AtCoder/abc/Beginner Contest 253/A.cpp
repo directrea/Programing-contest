@@ -5,9 +5,15 @@ using ll = long long;
 using namespace std;
 
 int main() {
-  ll sum = 0;
-  for (int i = 1; i <= 1000000000; i++) sum += i;
-  cout << sum << endl;
+  int a, b, c;
+  cin >> a >> b >> c;
+  vector<int> A(3);
+  A[0] = a, A[1] = b, A[2] = c;
+  sort(all(A));
+  if (A[1] == b)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 
   return 0;
 }

@@ -5,9 +5,14 @@ using ll = long long;
 using namespace std;
 
 int main() {
-  ll sum = 0;
-  for (int i = 1; i <= 1000000000; i++) sum += i;
-  cout << sum << endl;
-
+  set<int> st;
+  int N;
+  cin >> N;
+  rep(i, 0, N) {
+    int tmp;
+    cin >> tmp;
+    if (st.erase(tmp) == 0) st.insert(tmp);
+  }
+  cout << st.size() << endl;
   return 0;
 }
