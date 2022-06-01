@@ -4,17 +4,28 @@
 using ll = long long;
 using namespace std;
 
+ll GCD(ll A, ll B) {
+  if (A < B) swap(A, B);
+  while (B) {
+    A -= B;
+    if (A < B) swap(A, B);
+  }
+  return A;
+}
+
+ll LCM(ll A, ll B) { return (A * B) / GCD(A, B); }
+
 int main() {
   ll N;
-  int  A, B;
+  ll A, B;
   cin >> N >> A >> B;
-  ll ans = N * (N + 1) / 2;
-  cout << ans << endl;
-  unordered_set<int> st;
-  for (int i = 0; i <= N / A; i++) st.insert(A * i);
-  for (int i = 0; i <= N / B; i++) st.insert(B * i);
+  ll asum = 0;
+  for (int i = 0; i <= N / A; i++) asum += i * A;
+  ll bsum = 0;
+  for (int i = 0; i <= N / B; i++) bsum += i * B;
+  ll lcm = LCM(A, B), lcmsum = 0;
+  for (int i = 0; i <= N / lcm; i++) lcmsum += i * lcm;
 
-  for (int i : st) ans -= i;
-  cout << ans << endl;
+  cout << N * (N + 1) / 2 - (asum + bsum - lcmsum) << endl;
   return 0;
 }

@@ -4,10 +4,20 @@
 using ll = long long;
 using namespace std;
 
+ll GCD(ll A, ll B) {
+  if (A < B) swap(A, B);
+
+  while (B) {
+    A -= B;
+    if (A < B) swap(A, B);
+  }
+  return A;
+}
+
+ll LCM(ll A, ll B) { return (A * B) / GCD(A, B); }
+
 int main() {
-  ll sum = 0;
-  for (int i = 1; i <= 1000000000; i++) sum += i;
-  cout << sum << endl;
+  cout << LCM(630, 300) << endl;
 
   return 0;
 }
