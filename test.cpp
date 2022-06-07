@@ -4,20 +4,9 @@
 using ll = long long;
 using namespace std;
 
-ll GCD(ll A, ll B) {
-  if (A < B) swap(A, B);
-
-  while (B) {
-    A -= B;
-    if (A < B) swap(A, B);
-  }
-  return A;
-}
-
-ll LCM(ll A, ll B) { return (A * B) / GCD(A, B); }
-
 int main() {
-  cout << LCM(630, 300) << endl;
+  ll m = 165;
+  cout << cbrt(pow(m, 2)) << endl;
 
   return 0;
 }
