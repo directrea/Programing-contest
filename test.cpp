@@ -5,8 +5,7 @@ using ll = long long;
 using namespace std;
 
 int main() {
-  ll m = 165;
-  cout << cbrt(pow(m, 2)) << endl;
+  ll m = 378660287 % 7;
 
   return 0;
 }
