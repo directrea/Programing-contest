@@ -5,7 +5,11 @@ using ll = long long;
 using namespace std;
 
 int main() {
-  cout << LONG_LONG_MAX<<endl;
-
+  int N;
+  cin >> N;
+  ll ans;
+  ans = 1 << N;
+  printf("%lld\n",ans);
+  
   return 0;
 }
