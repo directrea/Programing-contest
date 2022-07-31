@@ -4,12 +4,18 @@
 using ll = long long;
 using namespace std;
 
-
-
 int main() {
-  ll N = 10;
-  N = N << 1;
+  string st;
+  int N;
+  cin >> st >> N;
 
-  ll ans = DecimalShift(N);
+  sort(all(st));
+  int cnt = 0;
+  do {
+    cnt++;
+    if (cnt == N) printf("%s\n", st.c_str());
+    
+  } while (next_permutation(all(st)));
+
   return 0;
 }
